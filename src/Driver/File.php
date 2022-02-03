@@ -13,7 +13,6 @@ declare (strict_types = 1);
 namespace Think\Component\Log\Driver;
 
 use Think\Component\Log\Contract\LogHandlerInterface;
-use think\App;
 
 /**
  * 本地化调试输出到文件
@@ -37,7 +36,7 @@ class File implements LogHandlerInterface
     ];
 
     // 实例化并传入参数
-    public function __construct(App $app, $config = [])
+    public function __construct($config = [])
     {
         if (is_array($config)) {
             $this->config = array_merge($this->config, $config);
@@ -45,10 +44,6 @@ class File implements LogHandlerInterface
 
         if (empty($this->config['format'])) {
             $this->config['format'] = '[%s][%s] %s';
-        }
-
-        if (empty($this->config['path'])) {
-            $this->config['path'] = $app->getRuntimePath() . 'log';
         }
 
         if (substr($this->config['path'], -1) != DIRECTORY_SEPARATOR) {
