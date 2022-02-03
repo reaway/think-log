@@ -36,7 +36,7 @@ class Log extends Manager implements LoggerInterface
     const DEBUG     = 'debug';
     const SQL       = 'sql';
 
-    protected $namespace = '\\think\\log\\driver\\';
+    protected $namespace = '\\Think\\Component\\Log\\Driver\\';
 
     /**
      * 默认驱动
