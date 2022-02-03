@@ -10,10 +10,10 @@
 // +----------------------------------------------------------------------
 declare (strict_types = 1);
 
-namespace think\log\driver;
+namespace Think\Component\Log\Driver;
 
+use Think\Component\Log\Contract\LogHandlerInterface;
 use think\App;
-use think\contract\LogHandlerInterface;
 
 /**
  * 本地化调试输出到文件
@@ -133,7 +133,6 @@ class File implements LogHandlerInterface
      */
     protected function getMasterLogFile(): string
     {
-
         if ($this->config['max_files']) {
             $files = glob($this->config['path'] . '*.log');
 
@@ -174,7 +173,6 @@ class File implements LogHandlerInterface
      */
     protected function getApartLevelFile(string $path, string $type): string
     {
-
         if ($this->config['single']) {
             $name = is_string($this->config['single']) ? $this->config['single'] : 'single';
 

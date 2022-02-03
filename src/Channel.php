@@ -10,13 +10,10 @@
 // +----------------------------------------------------------------------
 declare (strict_types = 1);
 
-namespace think\log;
+namespace Think\Component\Log;
 
 use Psr\Log\LoggerInterface;
-use think\contract\LogHandlerInterface;
-use think\Event;
-use think\event\LogRecord;
-use think\event\LogWrite;
+use Think\Component\Log\Contract\LogHandlerInterface;
 
 class Channel implements LoggerInterface
 {
@@ -43,13 +40,12 @@ class Channel implements LoggerInterface
      */
     protected $allow = [];
 
-    public function __construct(string $name, LogHandlerInterface $logger, array $allow, bool $lazy = true, Event $event = null)
+    public function __construct(string $name, LogHandlerInterface $logger, array $allow, bool $lazy = true)
     {
         $this->name   = $name;
         $this->logger = $logger;
         $this->allow  = $allow;
         $this->lazy   = $lazy;
-        $this->event  = $event;
     }
 
     /**
@@ -95,9 +91,6 @@ class Channel implements LoggerInterface
 
         if (!empty($msg) || 0 === $msg) {
             $this->log[$type][] = $msg;
-            if ($this->event) {
-                $this->event->trigger(new LogRecord($type, $msg));
-            }
         }
 
         if (!$this->lazy || !$lazy) {
@@ -136,11 +129,6 @@ class Channel implements LoggerInterface
     public function save(): bool
     {
         $log = $this->log;
-        if ($this->event) {
-            $event = new LogWrite($this->name, $log);
-            $this->event->trigger($event);
-            $log = $event->log;
-        }
 
         if ($this->logger->save($log)) {
             $this->clear();

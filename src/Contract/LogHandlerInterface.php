@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 declare (strict_types = 1);
 
-namespace think\contract;
+namespace Think\Component\Log\Contract;
 
 /**
  * 日志驱动接口

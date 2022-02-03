@@ -10,14 +10,14 @@
 // +----------------------------------------------------------------------
 declare (strict_types = 1);
 
-namespace think;
+namespace Think\Component\Log;
 
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
-use think\event\LogWrite;
 use think\helper\Arr;
-use think\log\Channel;
-use think\log\ChannelSet;
+use Think\Component\Manager\Manager;
+use Think\Component\Log\Channel;
+use Think\Component\Log\ChannelSet;
 
 /**
  * 日志管理类
@@ -202,16 +202,6 @@ class Log extends Manager implements LoggerInterface
     public function write($msg, string $type = 'info', array $context = [])
     {
         return $this->record($msg, $type, $context, false);
-    }
-
-    /**
-     * 注册日志写入事件监听
-     * @param $listener
-     * @return Event
-     */
-    public function listen($listener)
-    {
-        return $this->app->event->listen(LogWrite::class, $listener);
     }
 
     /**

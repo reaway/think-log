@@ -10,28 +10,27 @@
 // +----------------------------------------------------------------------
 declare (strict_types = 1);
 
-namespace think\facade;
+namespace Think\Component\Log\Facade;
 
-use think\Facade;
-use think\log\Channel;
-use think\log\ChannelSet;
+use Think\Component\Facade\Facade;
+use Think\Component\Log\Channel;
+use Think\Component\Log\ChannelSet;
 
 /**
- * @see \think\Log
+ * @see \Think\Component\Log\Log
  * @package think\facade
- * @mixin \think\Log
+ * @mixin \Think\Component\Log\Log
  * @method static string|null getDefaultDriver() 默认驱动
  * @method static mixed getConfig(null|string $name = null, mixed $default = null) 获取日志配置
  * @method static array getChannelConfig(string $channel, null $name = null, null $default = null) 获取渠道配置
  * @method static Channel|ChannelSet channel(string|array $name = null) driver() 的别名
  * @method static mixed createDriver(string $name)
- * @method static \think\Log clear(string|array $channel = '*') 清空日志信息
- * @method static \think\Log close(string|array $channel = '*') 关闭本次请求日志写入
+ * @method static \Think\Component\Log\Log clear(string|array $channel = '*') 清空日志信息
+ * @method static \Think\Component\Log\Log close(string|array $channel = '*') 关闭本次请求日志写入
  * @method static array getLog(string $channel = null) 获取日志信息
  * @method static bool save() 保存日志信息
- * @method static \think\Log record(mixed $msg, string $type = 'info', array $context = [], bool $lazy = true) 记录日志信息
- * @method static \think\Log write(mixed $msg, string $type = 'info', array $context = []) 实时写入日志信息
- * @method static Event listen($listener) 注册日志写入事件监听
+ * @method static \Think\Component\Log\Log record(mixed $msg, string $type = 'info', array $context = [], bool $lazy = true) 记录日志信息
+ * @method static \Think\Component\Log\Log write(mixed $msg, string $type = 'info', array $context = []) 实时写入日志信息
  * @method static void log(string $level, mixed $message, array $context = []) 记录日志信息
  * @method static void emergency(mixed $message, array $context = []) 记录emergency信息
  * @method static void alert(mixed $message, array $context = []) 记录警报信息
@@ -53,6 +52,6 @@ class Log extends Facade
      */
     protected static function getFacadeClass()
     {
-        return 'log';
+        return 'Think\Component\Log\Log';
     }
 }

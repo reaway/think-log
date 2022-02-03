@@ -10,11 +10,11 @@
 // +----------------------------------------------------------------------
 declare (strict_types = 1);
 
-namespace think\log\driver;
+namespace Think\Component\Log\Driver;
 
 use Psr\Container\NotFoundExceptionInterface;
+use Think\Component\Log\Contract\LogHandlerInterface;
 use think\App;
-use think\contract\LogHandlerInterface;
 
 /**
  * github: https://github.com/luofei614/SocketLog

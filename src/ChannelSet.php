@@ -10,9 +10,9 @@
 // +----------------------------------------------------------------------
 declare (strict_types = 1);
 
-namespace think\log;
+namespace Think\Component\Log;
 
-use think\Log;
+use Think\Component\Log\Log;
 
 /**
  * Class ChannelSet
