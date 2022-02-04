@@ -157,7 +157,7 @@ class Log extends Manager implements LoggerInterface
     {
         $driver = parent::createDriver($name);
 
-        $lazy  = !$this->getChannelConfig($name, "realtime_write", false) && !$this->app->runningInConsole();
+        $lazy  = !$this->getChannelConfig($name, "realtime_write", false);
         $allow = array_merge($this->getConfig("level", []), $this->getChannelConfig($name, "level", []));
 
         return new Channel($name, $driver, $allow, $lazy);
