@@ -39,6 +39,61 @@ class Log extends Manager implements LoggerInterface
     protected $namespace = '\\Think\\Component\\Log\\Driver\\';
 
     /**
+     * 配置参数
+     * @var array
+     */
+    protected $config = [
+        // 默认日志记录通道
+        'default'      => 'file',
+        // 日志记录级别
+        'level'        => [],
+        // 日志类型记录的通道 ['error'=>'email',...]
+        'type_channel' => [],
+        // 关闭全局日志写入
+        'close'        => false,
+        // 全局日志处理 支持闭包
+        'processor'    => null,
+
+        // 日志通道列表
+        'channels'     => [
+            'file' => [
+                // 日志记录方式
+                'type'           => 'File',
+                // 日志保存目录
+                'path'           => '',
+                // 单文件日志写入
+                'single'         => false,
+                // 独立日志级别
+                'apart_level'    => [],
+                // 最大日志文件数量
+                'max_files'      => 0,
+                // 使用JSON格式记录
+                'json'           => false,
+                // 日志处理
+                'processor'      => null,
+                // 关闭通道日志写入
+                'close'          => false,
+                // 日志输出格式化
+                'format'         => '[%s][%s] %s',
+                // 是否实时写入
+                'realtime_write' => false,
+            ],
+            // 其它日志通道配置
+        ],
+    ];
+
+    /**
+     * 设置配置
+     * @access public
+     * @param array $config 配置参数
+     * @return void
+     */
+    public function setConfig(array $config): void
+    {
+        $this->config = array_merge($this->config, $config);
+    }
+
+    /**
      * 默认驱动
      * @return string|null
      */
@@ -57,10 +112,10 @@ class Log extends Manager implements LoggerInterface
     public function getConfig(string $name = null, $default = null)
     {
         if (!is_null($name)) {
-            return $this->app->config->get('log.' . $name, $default);
+            return $this->config[$name] ?? $default;
         }
 
-        return $this->app->config->get('log');
+        return $this->config;
     }
 
     /**
@@ -72,7 +127,7 @@ class Log extends Manager implements LoggerInterface
      */
     public function getChannelConfig($channel, $name = null, $default = null)
     {
-        if ($config = $this->getConfig("channels.{$channel}")) {
+        if ($config = $this->config['channels'][$channel] ?? null) {
             return Arr::get($config, $name, $default);
         }
 
@@ -105,7 +160,7 @@ class Log extends Manager implements LoggerInterface
         $lazy  = !$this->getChannelConfig($name, "realtime_write", false) && !$this->app->runningInConsole();
         $allow = array_merge($this->getConfig("level", []), $this->getChannelConfig($name, "level", []));
 
-        return new Channel($name, $driver, $allow, $lazy, $this->app->event);
+        return new Channel($name, $driver, $allow, $lazy);
     }
 
     protected function resolveConfig(string $name)
