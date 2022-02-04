@@ -13,6 +13,8 @@
   ],
   "require": {
     "php": ">=7.2.0",
+    "ext-json": "*",
+    "ext-curl": "*",
     "psr/log": "~1.0",
     "reaway/think-manager": "^1.0",
     "reaway/think-container": "^1.0",
@@ -21,6 +23,9 @@
   "autoload": {
     "psr-4": {
       "Think\\Component\\Log\\": "src/"
-    }
+    },
+    "files": [
+      "src/helper.php"
+    ]
   }
 }
