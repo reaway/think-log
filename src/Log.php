@@ -83,17 +83,6 @@ class Log extends Manager implements LoggerInterface
     ];
 
     /**
-     * 设置配置
-     * @access public
-     * @param array $config 配置参数
-     * @return void
-     */
-    public function setConfig(array $config): void
-    {
-        $this->config = array_merge($this->config, $config);
-    }
-
-    /**
      * 默认驱动
      * @return string|null
      */
@@ -101,23 +90,7 @@ class Log extends Manager implements LoggerInterface
     {
         return $this->getConfig('default');
     }
-
-    /**
-     * 获取日志配置
-     * @access public
-     * @param null|string $name    名称
-     * @param mixed       $default 默认值
-     * @return mixed
-     */
-    public function getConfig(string $name = null, $default = null)
-    {
-        if (!is_null($name)) {
-            return $this->config[$name] ?? $default;
-        }
-
-        return $this->config;
-    }
-
+    
     /**
      * 获取渠道配置
      * @param string $channel
