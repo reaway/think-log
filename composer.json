@@ -1,0 +1,30 @@
+{
+  "name": "reaway/think-log",
+  "type": "library",
+  "description": "think log",
+  "keywords": [],
+  "homepage": "https://github.com/reaway/think-log",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "reaway",
+      "email": "reaway@foxmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "ext-json": "*",
+    "ext-curl": "*",
+    "psr/log": "^1.0|^2.0|^3.0",
+    "reaway/think-manager": "^8.0",
+    "reaway/think-facade": "^8.0",
+    "reaway/think-config": "^8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Think\\Component\\Log\\": "src/"
+    },
+    "files": [
+    ]
+  }
+}
